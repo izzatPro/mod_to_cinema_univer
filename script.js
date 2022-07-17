@@ -1,15 +1,62 @@
-let numberOfFilms = prompt("Сколько фильмов вы уже посмотрели?" , "");
-let personalMovieDB = {
-  count:numberOfFilms,
-  movies:{},
-  actors:{},
-  genres:[],
-  private:false  
+
+let numberOfFilms;
+function start(){
+  numberOfFilms = +prompt("Сколько фильмов вы уже посмотрели ?", "");
+while(numberOfFilms == "" || numberOfFilms == null || isNaN(numberOfFilms )){
+  numberOfFilms = +prompt("Сколько фильмов вы уже посмотрели ?" , "");
+}
+} 
+start();
+const personalMovieDB = {
+  count: numberOfFilms,
+  movies: {},
+  actors: {},
+  genres: [],
+  privat: false
 };
-const a = prompt("Один из последних просмотренный фильмов?", ""),
-      c = prompt("На сколько ояяяцените его?",""),
-      b = prompt("Один из последних просмотренный фильмов?", ""),
-      d = prompt("На сколько оцените его?aa","");
-personalMovieDB.movies[a] = c ;
-personalMovieDB.movies[b] = d ;
-console.log(personalMovieDB);
+function rememberMyFilms(){
+  for (let i = 0; i < 2; i++) {
+    const a = prompt('Один из последних просмотренных фильмов?', ''),
+          b = prompt('На сколько оцените его?', '');
+  
+    if (a != null && b != null && a != '' && b != '' && a.length < 50) {
+        personalMovieDB.movies[a] = b;
+        console.log('done');
+    } else {
+        console.log('error');
+        i--;
+    }
+  }
+}
+rememberMyFilms();
+
+function detectPersenalLevel(){
+  if (personalMovieDB.count < 10) {
+    console.log("Просмотрено довольно мало фильмов");
+  } else if (personalMovieDB.count >= 10 && personalMovieDB.count < 30) {
+    console.log("Вы классический зритель");
+  } else if (personalMovieDB.count >= 30) {
+    console.log("Вы киноман");
+  } else {
+    console.log("Произошла ошибка");
+  }
+}
+
+detectPersenalLevel();
+
+function showDB(){
+  if(personalMovieDB.privat === false){
+    console.log(personalMovieDB);
+  }
+  else{
+    console.log("Доступ приватный");
+  }
+}
+showDB();
+function writeYourGenres(){
+  for(let i = 0 ; i < 3 ; i++){
+    personalMovieDB.genres[i] = prompt(`Ваш любимый жанр под номером ${i+1}`)
+  }
+}
+writeYourGenres();
+
